@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: Cleaned and unpacked order data from the raw JSON source.
+    columns:
+      - name: order_id
+        description: Unique identifier for the order.
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: Foreign key to the customer who placed the order.
+        tests:
+          - not_null
+
+      - name: order_amount
+        description: Total order amount in smallest currency unit.
+
+      - name: currency
+        description: ISO 4217 currency code of the order amount (e.g. USD, EUR, GBP).
+        tests:
+          - not_null
+
+      - name: status
+        description: Current status of the order.
+        tests:
+          - not_null
+
+      - name: created_at
+        description: Timestamp when the order was created.
+
+      - name: synced_at
+        description: Fivetran sync timestamp.
+
+  - name: stg_customers
+    description: Cleaned and unpacked customer data from the raw JSON source.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_name
+        description: Full name of the customer.
+        tests:
+          - not_null
+
+      - name: email
+        description: Customer email address.
+        tests:
+          - unique
+
+      - name: created_at
+        description: Timestamp when the customer record was created.
+
+      - name: synced_at
+        description: Fivetran sync timestamp.

@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: mrt_order_summary
+    description: >
+      Analytics-ready order summary table. One row per order with customer
+      details denormalized. Designed for consumption by the analytics platform.
+    columns:
+      - name: order_id
+        description: Unique identifier for the order.
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: Identifier of the customer who placed the order.
+
+      - name: customer_name
+        description: Full name of the customer.
+
+      - name: email
+        description: Customer email address.
+
+      - name: order_amount
+        description: Total order amount in its original currency.
+
+      - name: currency
+        description: ISO 4217 currency code of the original order amount.
+
+      - name: amount_usd
+        description: Order amount converted to USD using the exchange_rates seed table.
+
+      - name: status
+        description: Current order status.
+
+      - name: ordered_at
+        description: Timestamp when the order was created.
+
+      - name: order_date
+        description: Date portion of the order timestamp, for easy date-based filtering.
+
+      - name: customer_created_at
+        description: Timestamp when the customer record was created.
+
+      - name: days_since_customer_signup
+        description: Number of days between customer signup and order placement.

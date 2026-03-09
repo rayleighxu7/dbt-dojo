@@ -1,0 +1,25 @@
+version: 2
+
+seeds:
+  - name: exchange_rates
+    description: >
+      Static lookup table of currency exchange rates to USD.
+      Used to convert foreign currency amounts into a common base currency.
+      Update this CSV and re-run `dbt seed` whenever rates change.
+    columns:
+      - name: currency_code
+        description: ISO 4217 currency code (e.g. USD, EUR, GBP).
+        tests:
+          - not_null
+
+      - name: rate_to_usd
+        description: >
+          How many USD one unit of this currency is worth.
+          For example, EUR at 1.085 means 1 EUR = 1.085 USD.
+        tests:
+          - not_null
+
+      - name: effective_date
+        description: Date from which this rate applies.
+        tests:
+          - not_null

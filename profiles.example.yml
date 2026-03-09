@@ -1,0 +1,11 @@
+dbt_dojo:
+  target: dev
+  outputs:
+    dev:
+      type: mysql
+      server: 127.0.0.1
+      port: 3306
+      schema: dbt_dojo_dev
+      username: "{{ env_var('DBT_MYSQL_USER', 'root') }}"
+      password: "{{ env_var('DBT_MYSQL_PASSWORD', '') }}"
+      charset: utf8mb4

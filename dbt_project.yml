@@ -1,0 +1,32 @@
+name: 'dbt_dojo'
+version: '0.1.0'
+
+profile: 'dbt_dojo'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dbt_dojo:
+    exchange_rates:
+      +column_types:
+        currency_code: varchar(3)
+        rate_to_usd: decimal(18, 6)
+        effective_date: date
+
+models:
+  dbt_dojo:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

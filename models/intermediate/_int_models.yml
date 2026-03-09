@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int_orders_with_customers
+    description: Orders enriched with customer details. Joins staging orders to staging customers.
+    columns:
+      - name: order_id
+        description: Unique identifier for the order.
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: Foreign key to the customer.
+
+      - name: customer_name
+        description: Full name of the customer who placed the order.
+
+      - name: email
+        description: Customer email address.
+
+      - name: order_amount
+        description: Total order amount.
+
+      - name: currency
+        description: ISO 4217 currency code of the order amount.
+
+      - name: status
+        description: Current order status.
+
+      - name: ordered_at
+        description: Timestamp when the order was created.
+
+      - name: customer_created_at
+        description: Timestamp when the customer record was created.
